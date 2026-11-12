@@ -4,15 +4,15 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Research overview and findings.">
-    <title>Research | Project Title</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Research | Arduino Weather Station</title>
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
     <a class="skip-link" href="#main-content">Skip to content</a>
 
     <header class="site-header">
         <div class="container header-content">
-            <a class="site-title" href="index.html">Project Title</a>
+            <a class="site-title" href="index.html">Arduino Weather Station</a>
 
             <nav aria-label="Main navigation">
                 <a href="index.html" aria-current="page">Research</a>
@@ -34,20 +34,80 @@
 
         <section aria-labelledby="findings-heading">
             <h2 id="findings-heading">Processed and Validated Data</h2>
-            <ul>
-                <li>Add Wind Speed</li>
-                <li>Add Wind Direction</li>
-            </ul>
+            <div class="cards">
+                <div class="card">
+                    <h3>Wind Speed</h3>
+                    <p class="reading" id="validated-speed">&mdash;</p>
+                    <p class="note">No validated data yet.</p>
+                </div>
+                <div class="card">
+                    <h3>Wind Direction</h3>
+                    <p class="reading" id="validated-dir">&mdash;</p>
+                    <p class="note">No validated data yet.</p>
+                </div>
+            </div>
         </section>
 
         <section aria-labelledby="analysis-heading">
             <h2 id="analysis-heading">Unvalidated Data</h2>
             <p>
-                This data is collected from the Arduino Weather Station but valdiation and error analysis has not been completed.  
+                This data is collected from the Arduino Weather Station, but
+                validation and error analysis have not been completed.
+            </p>
+
+            <div class="controls">
+                <button type="button" id="connect-btn">Connect to Arduino</button>
+                <button type="button" id="disconnect-btn" class="secondary" disabled>Disconnect</button>
+                <label for="baud">Baud rate</label>
+                <select id="baud">
+                    <option value="9600" selected>9600</option>
+                    <option value="19200">19200</option>
+                    <option value="57600">57600</option>
+                    <option value="115200">115200</option>
+                </select>
+                <span id="status" class="status" role="status" aria-live="polite">Not connected</span>
+            </div>
+
+            <div class="cards">
+                <div class="card">
+                    <h3>Wind Speed</h3>
+                    <p class="reading"><span id="live-speed">&mdash;</span> <span class="unit">mph</span></p>
+                </div>
+                <div class="card">
+                    <h3>Wind Direction</h3>
+                    <p class="reading">
+                        <span id="live-dir">&mdash;</span>&deg;
+                        <span class="unit" id="live-compass"></span>
+                    </p>
+                    <div class="compass" aria-hidden="true">
+                        <div class="needle" id="needle"></div>
+                        <span class="n">N</span><span class="e">E</span>
+                        <span class="s">S</span><span class="w">W</span>
+                    </div>
+                </div>
+            </div>
+
+            <h3>Recent readings</h3>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th scope="col">Time</th>
+                            <th scope="col">Wind speed (mph)</th>
+                            <th scope="col">Wind direction (&deg;)</th>
+                        </tr>
+                    </thead>
+                    <tbody id="log">
+                        <tr><td colspan="3">No data yet. Connect your Arduino to begin.</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <p>
+                <button type="button" id="download-btn" class="secondary" disabled>Download readings (CSV)</button>
             </p>
         </section>
-
-        </section>
     </main>
+
+    <script src="assets/js/app.js"></script>
 </body>
 </html>
